@@ -70,14 +70,14 @@ C=======================================================================
 
       REAL    SWINIT(NL),WRESR,WRESND,EFINOC,EFNFIX,INO3(NL),INH4(NL)
       REAL    PLTFOR 
-      INTEGER LNSIMTMP,TVILENT
+      ! INTEGER LNSIMTMP,TVILENT
 
       PARAMETER (LUNIO = 21)
       PARAMETER (ERRKEY = 'OPTEMPX')
       
-      LNSIMTMP = LNSIM
+      ! LNSIMTMP = LNSIM
       IF (LNSIM.LE.0) LNSIM = 1
-      IF (TVILENT(TITSIM).LE.0) TITSIM(1:7)="MISSING" 
+      ! IF (TVILENT(TITSIM).LE.0) TITSIM(1:7)="MISSING" 
 
       LN = LEN(TRIM(FILEIO))
       FILEIOH = FILEIO
@@ -238,7 +238,7 @@ C-----------------------------------------------------------------------
      &     LNCHE,LNTIL,LNENV,LNHAR,LNSIM
  55   FORMAT (I3,1X,I2,2(1X,I1),1X,A25,14(1X,I3))
  
-      LNSIM = LNSIMTMP
+      ! LNSIM = LNSIMTMP
  
 C-----------------------------------------------------------------------
 C

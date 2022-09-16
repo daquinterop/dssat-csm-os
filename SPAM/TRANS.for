@@ -35,7 +35,7 @@ C=======================================================================
 !-----------------------------------------------------------------------
       USE ModuleDefs
       USE ModuleData
-      USE YCA_Growth_VPD
+      ! USE YCA_Growth_VPD
       IMPLICIT NONE
       
       TYPE (WeatherType) WEATHER
@@ -97,33 +97,33 @@ C       soil water balance and predicting measured ET.
           EOP = KCB * REFET !KRT added for ASCE dual Kc ET approach
         ELSE  
           FDINT = 1.0 - EXP(-(KTRANS) * XHLAI) 
-            IF (meevp .NE.'H') THEN 
+            ! IF (meevp .NE.'H') THEN 
                 EOP = EO * FDINT
-            ELSE
-              CALL GET('SPAM', 'PHSV' ,phsv)
-              CALL GET('SPAM', 'PHTV' ,phtv)
+!             ELSE
+!               CALL GET('SPAM', 'PHSV' ,phsv)
+!               CALL GET('SPAM', 'PHTV' ,phtv)
       
-              IF (phsv <= 0.0) THEN
-                  MSG(1) = "VPD sensitivity parameter PHSV" //
-     &              " is not defined for EVAPO method (H)."
-                  MSG(2) = "Program will stop."
-                  CALL WARNING(2, ERRKEY, MSG)
-                  CALL ERROR(ERRKEY,4,"",0)
-              ENDIF
-              IF (phtv <= 0.0) THEN
-                  MSG(1) = "VPD threshold parameter PHTV is" //
-     &              " not defined for EVAPO method (H)."
-                  MSG(2) = "Program will stop."
-                  CALL WARNING(2, ERRKEY, MSG)
-                  CALL ERROR(ERRKEY,4,"",0)
-              ENDIF
-              DO hour = 1,TS 
-                  VPDFPHR(hour) =  get_Growth_VPDFPHR(PHSV, PHTV, TDEW, 
-     &                     TMIN, TAIRHR, hour)
-                  EOPH(hour) = (ET0(hour) * FDINT) * VPDFPHR(hour)
-                  EOP = EOP + EOPH(hour)
-              ENDDO
-          ENDIF
+!               IF (phsv <= 0.0) THEN
+!                   MSG(1) = "VPD sensitivity parameter PHSV" //
+!      &              " is not defined for EVAPO method (H)."
+!                   MSG(2) = "Program will stop."
+!                   CALL WARNING(2, ERRKEY, MSG)
+!                   CALL ERROR(ERRKEY,4,"",0)
+!               ENDIF
+!               IF (phtv <= 0.0) THEN
+!                   MSG(1) = "VPD threshold parameter PHTV is" //
+!      &              " not defined for EVAPO method (H)."
+!                   MSG(2) = "Program will stop."
+!                   CALL WARNING(2, ERRKEY, MSG)
+!                   CALL ERROR(ERRKEY,4,"",0)
+!               ENDIF
+!               DO hour = 1,TS 
+!                   VPDFPHR(hour) =  get_Growth_VPDFPHR(PHSV, PHTV, TDEW, 
+!      &                     TMIN, TAIRHR, hour)
+!                   EOPH(hour) = (ET0(hour) * FDINT) * VPDFPHR(hour)
+!                   EOP = EOP + EOPH(hour)
+!               ENDDO
+!           ENDIF
           EOP_reduc = EOP * (1. - TRAT)  
           EOP = EOP * TRAT
 
@@ -164,7 +164,7 @@ C         will depend on whether actual soil evapo (EVAP) meets EOS
 ! KCB     Basal crop coefficient for ASCE dual Kc ET method
 ! LNUM    Current line number of input file
 ! REFET   ASCE Standardized Reference Evapotranspiration (alfalfa or grass)
-! TAVG    Average daily temperature (°C)
+! TAVG    Average daily temperature (ï¿½C)
 ! TRAT    Relative transpiration rate for CO2 values other than 330 ppm
 ! TRATIO  Function subroutine which calculates relative transpiration rate.
 !
@@ -305,7 +305,7 @@ C     Compute delta and gamma.
 ! RLF      Leaf stomatal resistance at 330.0 ppm CO2 (s/m)
 ! RLFC     Leaf stomatal resistance at other CO2 concentration (s/m)
 ! RS1, RS2
-! TAVG     Average daily temperature (°C)
+! TAVG     Average daily temperature (ï¿½C)
 ! TRATIO   Function subroutine which calculates relative transpiration
 !            rate.
 ! UAVG     Average wind speed (m/s)
